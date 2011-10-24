@@ -10,8 +10,10 @@ package orp
 	import orp.command.DeleteTaskCommand;
 	import orp.command.LoadTasksCommand;
 	import orp.command.SaveTaskCommand;
+	import orp.command.StateCommand;
 	import orp.command.UpdateTaskCommand;
 	import orp.command.events.SaveTaskEvent;
+	import orp.command.events.StateExitEvent;
 	import orp.command.events.UpdateTaskEvent;
 	import orp.model.TaskListModel;
 	import orp.service.ITaskService;
@@ -20,8 +22,6 @@ package orp
 	import orp.view.TaskView;
 	import orp.view.TaskViewMediator;
 	import orp.view.events.DeleteEvent;
-	import orp.view.events.ItemEvent;
-	import orp.vo.Task;
 	
 	public class ORPContext extends Context
 	{
@@ -43,6 +43,7 @@ package orp
 			commandMap.mapEvent(SaveTaskEvent.SAVE, SaveTaskCommand);
 			commandMap.mapEvent(UpdateTaskEvent.UPDATE, UpdateTaskCommand);
 			commandMap.mapEvent(DeleteEvent.DELETE, DeleteTaskCommand);
+			commandMap.mapEvent(StateExitEvent.EXIT, StateCommand);
 		}
 	}
 }

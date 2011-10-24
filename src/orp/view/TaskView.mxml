@@ -12,6 +12,7 @@
 			
 			import orp.command.events.SaveTaskEvent;
 			import orp.model.TaskListModel;
+			import orp.service.ITaskService;
 			import orp.utils.Calculator;
 			import orp.vo.Task;
 			
@@ -19,6 +20,9 @@
 			
 			[Inject]
 			public var model:TaskListModel;
+			
+			[Inject]
+			public var service:ITaskService;
 			
 			protected function displayItemData(event:MouseEvent):void
 			{

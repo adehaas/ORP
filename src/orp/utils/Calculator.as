@@ -12,5 +12,27 @@ package orp.utils
 			var result:Array = [mean, deviation];
 			return result;
 		}
+		
+		public static function calculateMeanSequence(values:Array):Number
+		{
+			var result:Number = 0;
+			
+			for (var i:int = 0; i < values.length; i++) 
+				result += Number(values[i]);
+			
+			return result;
+		}
+		
+		public static function calculateDeviationSequence(values:Array):Number
+		{
+			var result:Number = 0;
+			var tempResult:Number = 0;
+			
+			for (var i:int = 0; i < values.length; i++) 
+				tempResult += Number(values[i]) * Number(values[i]);
+			
+			result = Math.sqrt(tempResult);
+			return result;
+		}
 	}
 }

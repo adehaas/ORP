@@ -16,6 +16,8 @@
 			import logmeister.connectors.TrazzleConnector;
 			
 			import mx.events.FlexEvent;
+			
+			import orp.command.events.StateExitEvent;
 			private var _delay:int = 10;
 						
 			protected function onComplete(event:FlexEvent):void
@@ -48,16 +50,21 @@
 			{
 				handleResize(null);
 			}
+			
+			protected function handleStateExit():void
+			{
+				context.dispatchEvent(new StateExitEvent(currentState));
+			}
 		]]>
 	</fx:Script>
 	
 	<s:states>
-		<s:State name="portrait"/>
-		<s:State name="landscape"/>
+		<s:State name="portrait" exitState="handleStateExit()"/>
+		<s:State name="landscape" exitState="handleStateExit()"/>
 	</s:states>
 	
 	<view:TaskView id="taskView" width="320" height="460" visible="true" visible.portrait="true" visible.landscape="false"/>
 	
-	<s:Label text="TEST" width="480" visible="false" visible.portrait="false" visible.landscape="true"/>
+	<view:OverView id="overView" visible="true" visible.portrait="false" visible.landscape="true"/>
 	
 </s:Application>
