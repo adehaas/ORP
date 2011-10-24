@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:View xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		xmlns:s="library://ns.adobe.com/flex/spark" title="TaskView"
+		backgroundColor="0x2E2E2E">
+	
+	<fx:Script>
+		<![CDATA[
+			import mx.collections.ArrayCollection;
+			import mx.controls.listClasses.IListItemRenderer;
+			import mx.events.FlexEvent;
+			import mx.utils.ObjectUtil;
+			
+			import orp.command.events.SaveTaskEvent;
+			import orp.model.TaskListModel;
+			import orp.utils.Calculator;
+			import orp.vo.Task;
+			
+			import spark.components.DataGroup;
+			
+			[Inject]
+			public var model:TaskListModel;
+			
+			private function simpleAverage():void
+			{
+				//Calculator.simpleAverage([optimisticInput.text, realisticInput.text, pessimisticInput.text]).toString();
+			}
+			
+			protected function displayItemData(event:MouseEvent):void
+			{
+				if(event.target is DataGroup)
+					return;
+				else
+					var task:Task = event.target.data as Task;
+				
+				optimisticInput.text = task.optimistic.toString();
+				realisticInput.text = task.realistic.toString();
+				pessimisticInput.text = task.pessimistic.toString();
+			}
+		]]>
+	</fx:Script>
+	
+	<s:Group left="10" right="10" top="10" bottom="10" color="#2E2E2E">
+		
+		<s:layout>
+			<s:VerticalLayout/>
+		</s:layout>
+		
+		<s:HGroup x="1" y="-5" width="303" height="55" verticalAlign="middle">
+			<s:Button label="Add" id="addTaskButton"/>
+			<s:TextInput id="taskInput" width="242" height="40" editable="true"/>
+		</s:HGroup>
+		
+		<s:Scroller>
+			<s:Group>
+				<s:List id="taskList" width="300" height="220" itemRenderer="orp.view.renderer.TaskItemRenderer" click="displayItemData(event)"/>
+			</s:Group>
+		</s:Scroller>
+		
+		<s:HGroup x="49" y="11" width="300" height="50" verticalAlign="middle">
+			<s:Label color="#FFFFFF" text="Optimistic"/>
+			<s:Spacer width="100%"/>
+			<s:TextInput id="optimisticInput" width="150"/>
+		</s:HGroup>
+		
+		<s:HGroup x="49" y="11" width="300" height="50" verticalAlign="middle">
+			<s:Label color="#FFFFFF" text="Realistic"/>
+			<s:Spacer width="100%"/>
+			<s:TextInput id="realisticInput" width="150"/>
+		</s:HGroup>
+		
+		<s:HGroup x="49" y="11" width="300" height="50" verticalAlign="middle">
+			<s:Label color="#FFFFFF" text="Pessimistic"/>
+			<s:Spacer width="100%"/>
+			<s:TextInput id="pessimisticInput" width="150"/>
+		</s:HGroup>
+		
+	</s:Group>
+		
+</s:View>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:ItemRenderer xmlns:fx="http://ns.adobe.com/mxml/2009" 
+				xmlns:s="library://ns.adobe.com/flex/spark" 
+				width="300" height="40" mouseChildren="false">
+	
+	<s:HGroup>
+		<s:Label text="{data.name}"/>
+		<s:Label text="{data.mean.toPrecision(2)}"/>
+		<s:Label text="/"/>
+		<s:Label text="{data.deviation.toPrecision(2)}"/>
+	</s:HGroup>
+	
+</s:ItemRenderer>

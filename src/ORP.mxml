@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" 
+			   xmlns:s="library://ns.adobe.com/flex/spark" applicationDPI="160"
+			   applicationComplete="onComplete(event)" xmlns:view="orp.view.*"
+			   resizeForSoftKeyboard="true" xmlns:orp="orp.*">
+	<fx:Script>
+		<![CDATA[
+			import logmeister.LogMeister;
+			import logmeister.connectors.TrazzleConnector;
+			
+			import mx.events.FlexEvent;
+			import mx.events.ResizeEvent;
+			
+			protected function onComplete(event:FlexEvent):void
+			{
+				LogMeister.addLogger(new TrazzleConnector(stage, 'ORP'));
+				info('ORP');
+				
+				context.dispatchEvent(event);
+			}
+		]]>
+	</fx:Script>
+	
+	<fx:Declarations>
+		<orp:ORPContext id="context" contextView="{this}"/>
+	</fx:Declarations>
+	
+	<s:states>
+		<s:State name="portrait"/>
+		<s:State name="landscape"/>
+	</s:states>
+	
+	<view:TaskView id="taskView" includeIn="portrait" width="320" height="460"/>
+	
+	<s:Label text="TEST" includeIn="landscape"/>
+	
+</s:Application>
