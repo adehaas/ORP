@@ -12,6 +12,8 @@ package orp.view
 	import orp.command.events.UpdateTaskEvent;
 	import orp.model.TaskListModel;
 	import orp.model.events.TaskEvent;
+	import orp.service.ITaskService;
+	import orp.view.events.DeleteEvent;
 	import orp.view.events.ItemEvent;
 	import orp.vo.Task;
 	
@@ -33,6 +35,20 @@ package orp.view
 			view.optimisticInput.addEventListener(Event.CHANGE, handleInputChange);
 			view.realisticInput.addEventListener(Event.CHANGE, handleInputChange);
 			view.pessimisticInput.addEventListener(Event.CHANGE, handleInputChange);
+			
+			view.taskList.addEventListener(DeleteEvent.DELETE, redispatchDeleteEvent);
+			
+			eventDispatcher.addEventListener(TaskEvent.UPDATE, updateTaskList);
+		}
+		
+		private function updateTaskList(event:TaskEvent):void
+		{
+			debug(model.tasks);
+		}
+		
+		protected function redispatchDeleteEvent(event:Event):void
+		{
+			dispatch(event);
 		}
 		
 		protected function handleInputChange(event:TextOperationEvent):void

@@ -11,7 +11,6 @@ package orp.command
 		
 		override public function execute():void
 		{
-			notice();
 			service.loadAllTasks();
 		}
 	}

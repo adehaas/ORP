@@ -1,13 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 <s:ItemRenderer xmlns:fx="http://ns.adobe.com/mxml/2009" 
 				xmlns:s="library://ns.adobe.com/flex/spark" 
-				width="300" height="40" mouseChildren="false">
+				width="100%" height="100%"
+				creationComplete="onComplete(event)">
+	<fx:Script>
+		<![CDATA[
+			import mx.events.FlexEvent;
+			
+			import orp.view.TaskList;
+			import orp.vo.Task;
+			
+			import spark.components.List;
+			
+			protected function onComplete(event:FlexEvent):void
+			{
+				Multitouch.inputMode = MultitouchInputMode.GESTURE;
+//				addEventListener(TransformGestureEvent.GESTURE_SWIPE, onSwipe);
+			}
+			
+			protected function onSwipe(event:TransformGestureEvent):void
+			{
+				event.offsetX == 1 ? deleteButton.x = width : deleteButton.x = width - deleteButton.width;
+			}
+		]]>
+	</fx:Script>
 	
-	<s:HGroup>
-		<s:Label text="{data.name}"/>
-		<s:Label text="{data.mean.toPrecision(2)}"/>
-		<s:Label text="/"/>
-		<s:Label text="{data.deviation.toPrecision(2)}"/>
+	<s:HGroup verticalAlign="middle" mouseEnabled="false" width="100%">
+		<s:Label text="{data.name}" mouseEnabled="false"/>
+		<s:Label text="{data.mean.toPrecision(2)}" mouseEnabled="false"/>
+		<s:Label text="|" mouseEnabled="false"/>
+		<s:Label text="{data.deviation.toPrecision(2)}" mouseEnabled="false"/>
+		<s:Spacer width="100%"/>
+		<s:Button id="deleteButton" label="Delete" height="35">
+			<s:click>
+				<![CDATA[
+					(owner as TaskList).dispatchDeleteEvent(data as Task);
+				]]>
+			</s:click>
+		</s:Button>
 	</s:HGroup>
 	
 </s:ItemRenderer>

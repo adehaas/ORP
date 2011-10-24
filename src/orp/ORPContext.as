@@ -7,6 +7,7 @@ package orp
 	import org.robotlegs.mvcs.Context;
 	
 	import orp.command.ConfigureDBCommand;
+	import orp.command.DeleteTaskCommand;
 	import orp.command.LoadTasksCommand;
 	import orp.command.SaveTaskCommand;
 	import orp.command.UpdateTaskCommand;
@@ -18,6 +19,7 @@ package orp
 	import orp.service.events.DatabaseReadyEvent;
 	import orp.view.TaskView;
 	import orp.view.TaskViewMediator;
+	import orp.view.events.DeleteEvent;
 	import orp.view.events.ItemEvent;
 	import orp.vo.Task;
 	
@@ -40,6 +42,7 @@ package orp
 			commandMap.mapEvent(DatabaseReadyEvent.READY, LoadTasksCommand);
 			commandMap.mapEvent(SaveTaskEvent.SAVE, SaveTaskCommand);
 			commandMap.mapEvent(UpdateTaskEvent.UPDATE, UpdateTaskCommand);
+			commandMap.mapEvent(DeleteEvent.DELETE, DeleteTaskCommand);
 		}
 	}
 }

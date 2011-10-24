@@ -4,7 +4,7 @@ package orp.model.events
 	
 	public class TaskEvent extends Event
 	{
-		public static var ADDED:String = 'TaskEvent.ADDED';
+		public static var UPDATE:String = 'TaskEvent.UPDATE';
 		
 		public function TaskEvent(type:String, bubbles:Boolean=false, cancelable:Boolean=false)
 		{

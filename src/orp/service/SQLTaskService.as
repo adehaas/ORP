@@ -4,10 +4,17 @@ package orp.service
 	
 	import flash.data.SQLResult;
 	import flash.errors.SQLError;
+	import flash.events.DataEvent;
+	
+	import flashx.textLayout.events.ModelChange;
+	
+	import mx.utils.ObjectUtil;
 	
 	import org.robotlegs.mvcs.Actor;
 	
 	import orp.model.TaskListModel;
+	import orp.model.events.TaskEvent;
+	import orp.service.events.DatabaseReadyEvent;
 	import orp.service.helpers.ISQLRunnerDelegate;
 	import orp.vo.Task;
 	
@@ -15,6 +22,7 @@ package orp.service
 	{
 		[Inject]
 		public var sqlRunner:ISQLRunnerDelegate;
+		
 		[Inject]
 		public var taskListModel:TaskListModel;
 		
@@ -74,6 +82,7 @@ package orp.service
 		
 		private function deleteTaskResult(results:Vector.<SQLResult>):void
 		{
+			dispatch(new DatabaseReadyEvent);
 		}
 		
 		[Embed(source="/assets/data/sql/tasks/SaveTask.sql", mimeType="application/octet-stream")]
