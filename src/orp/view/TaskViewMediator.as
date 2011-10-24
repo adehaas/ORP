@@ -13,6 +13,7 @@ package orp.view
 	import orp.model.TaskListModel;
 	import orp.model.events.TaskEvent;
 	import orp.service.ITaskService;
+	import orp.service.events.DatabaseReadyEvent;
 	import orp.view.events.DeleteEvent;
 	import orp.view.events.ItemEvent;
 	import orp.vo.Task;
@@ -35,15 +36,16 @@ package orp.view
 			view.optimisticInput.addEventListener(Event.CHANGE, handleInputChange);
 			view.realisticInput.addEventListener(Event.CHANGE, handleInputChange);
 			view.pessimisticInput.addEventListener(Event.CHANGE, handleInputChange);
-			
 			view.taskList.addEventListener(DeleteEvent.DELETE, redispatchDeleteEvent);
 			
-			eventDispatcher.addEventListener(TaskEvent.UPDATE, updateTaskList);
+			eventDispatcher.addEventListener(DatabaseReadyEvent.READY, updateFields);
 		}
 		
-		private function updateTaskList(event:TaskEvent):void
+		private function updateFields(event:DatabaseReadyEvent):void
 		{
-			debug(model.tasks);
+			view.optimisticInput.text = '';
+			view.realisticInput.text = '';
+			view.pessimisticInput.text = '';
 		}
 		
 		protected function redispatchDeleteEvent(event:Event):void
@@ -75,6 +77,8 @@ package orp.view
 			task.name = view.taskInput.text;
 			
 			dispatch(new SaveTaskEvent(task));
+			
+			view.taskInput.text = '';
 		}
 	}
 }

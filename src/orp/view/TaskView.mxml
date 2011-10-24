@@ -20,11 +20,6 @@
 			[Inject]
 			public var model:TaskListModel;
 			
-			private function simpleAverage():void
-			{
-				//Calculator.simpleAverage([optimisticInput.text, realisticInput.text, pessimisticInput.text]).toString();
-			}
-			
 			protected function displayItemData(event:MouseEvent):void
 			{
 				if(event.target is DataGroup || event.target is Button)
@@ -35,6 +30,18 @@
 				optimisticInput.text = task.optimistic.toString();
 				realisticInput.text = task.realistic.toString();
 				pessimisticInput.text = task.pessimistic.toString();
+			}
+			
+			protected function handleFocusIn(event:FocusEvent):void
+			{
+				if(event.target.text == 0)
+					event.target.text = '';
+			}
+			
+			protected function handleFocusOut(event:FocusEvent):void
+			{
+				if(event.target.text == '')
+					event.target.text = 0;
 			}
 		]]>
 	</fx:Script>
@@ -52,7 +59,6 @@
 		
 		<s:Scroller>
 			<s:Group>
-				<!-- <view:List id="taskList" width="300" height="220" itemRenderer="orp.view.renderer.TaskItemRenderer" click="displayItemData(event)"/> -->
 				<view:TaskList id="taskList" click="displayItemData(event)"/>
 			</s:Group>
 		</s:Scroller>
@@ -60,19 +66,19 @@
 		<s:HGroup x="49" y="11" width="300" height="50" verticalAlign="middle">
 			<s:Label color="#FFFFFF" text="Optimistic"/>
 			<s:Spacer width="100%"/>
-			<s:TextInput id="optimisticInput" width="150"/>
+			<s:TextInput id="optimisticInput" width="150" focusIn="handleFocusIn(event)" focusOut="handleFocusOut(event)"/>
 		</s:HGroup>
 		
 		<s:HGroup x="49" y="11" width="300" height="50" verticalAlign="middle">
 			<s:Label color="#FFFFFF" text="Realistic"/>
 			<s:Spacer width="100%"/>
-			<s:TextInput id="realisticInput" width="150"/>
+			<s:TextInput id="realisticInput" width="150" focusIn="handleFocusIn(event)" focusOut="handleFocusOut(event)"/>
 		</s:HGroup>
 		
 		<s:HGroup x="49" y="11" width="300" height="50" verticalAlign="middle">
 			<s:Label color="#FFFFFF" text="Pessimistic"/>
 			<s:Spacer width="100%"/>
-			<s:TextInput id="pessimisticInput" width="150"/>
+			<s:TextInput id="pessimisticInput" width="150" focusIn="handleFocusIn(event)" focusOut="handleFocusOut(event)"/>
 		</s:HGroup>
 		
 	</s:Group>
