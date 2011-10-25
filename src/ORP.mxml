@@ -63,7 +63,7 @@
 		<s:State name="landscape" exitState="handleStateExit()"/>
 	</s:states>
 	
-	<view:TaskView id="taskView" width="320" height="460" visible="true" visible.portrait="true" visible.landscape="false"/>
+	<view:TaskView id="taskView" visible="true" visible.portrait="true" visible.landscape="false"/>
 	
 	<view:OverView id="overView" visible="true" visible.portrait="false" visible.landscape="true"/>
 	

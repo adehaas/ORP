@@ -25,19 +25,34 @@
 		]]>
 	</fx:Script>
 	
-	<s:HGroup verticalAlign="middle" mouseEnabled="false" width="100%">
-		<s:Label text="{data.name}" mouseEnabled="false"/>
-		<s:Label text="{data.mean.toPrecision(2)}" mouseEnabled="false"/>
-		<s:Label text="|" mouseEnabled="false"/>
-		<s:Label text="{data.deviation.toPrecision(2)}" mouseEnabled="false"/>
-		<s:Spacer width="100%"/>
-		<s:Button id="deleteButton" label="Delete" height="35">
-			<s:click>
-				<![CDATA[
-					(owner as TaskList).dispatchDeleteEvent(data as Task);
-				]]>
-			</s:click>
-		</s:Button>
-	</s:HGroup>
+		<s:Group>
+			<s:Graphic>
+				<s:Line width="320">
+					<s:stroke>
+						<s:SolidColorStroke color="0x000000" weight="0.5"/>
+					</s:stroke>
+				</s:Line>
+			</s:Graphic>
+		</s:Group>
+	
+		<s:HGroup left="5" right="10" top="5" bottom="5" id="inputs" verticalAlign="middle" mouseEnabled="false" width="100%">
+			
+			<s:Label text="{data.name}" mouseEnabled="false"/>
+			<s:Label text="{data.mean.toPrecision(2)}" mouseEnabled="false"/>
+			<s:Label text="|" mouseEnabled="false"/>
+			<s:Label text="{data.deviation.toPrecision(2)}" mouseEnabled="false"/>
+			
+			<s:Spacer width="100%"/>
+			
+			<s:Button id="deleteButton" label="-" height="{deleteButton.width}">
+				<s:click>
+					<![CDATA[
+						(owner as TaskList).dispatchDeleteEvent(data as Task);
+					]]>
+				</s:click>
+			</s:Button>
+			
+		</s:HGroup>
+	
 	
 </s:ItemRenderer>

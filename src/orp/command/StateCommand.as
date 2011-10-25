@@ -2,6 +2,7 @@ package orp.command
 {
 	import org.robotlegs.mvcs.Command;
 	
+	import orp.command.events.OrpResultEvent;
 	import orp.command.events.StateExitEvent;
 	import orp.model.TaskListModel;
 	import orp.utils.Calculator;
@@ -38,7 +39,10 @@ package orp.command
 			var meanResult:Number = Calculator.calculateMeanSequence(meanValues);
 			var deviationResult:Number = Calculator.calculateDeviationSequence(deviationValues);
 			
-			warn(meanResult, deviationResult);
+			model.meanResult = meanResult;
+			model.deviationResult = deviationResult;
+			
+			eventDispatcher.dispatchEvent(new OrpResultEvent(OrpResultEvent.RESULTS, meanResult, deviationResult));
 			
 			commandMap.release(this);
 		}

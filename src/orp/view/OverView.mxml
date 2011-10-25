@@ -12,4 +12,9 @@
 		]]>
 	</fx:Script>
 	
+	<s:VGroup>
+		<s:Label id="meanResult"/>
+		<s:Label id="deviationResult"/>
+	</s:VGroup>
+	
 </s:View>

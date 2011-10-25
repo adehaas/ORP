@@ -52,7 +52,11 @@ package orp.view
 		
 		protected function handleInputChange(event:TextInputChangeEvent):void
 		{
-			var task:Task = view.taskList.selectedItem as Task;
+			var task:Task = view.taskList.selectedItem && view.taskList.selectedItem as Task;
+			
+			if(!task)
+				return;
+			
 			switch(event.input)
 			{
 				case view.optimisticInput:

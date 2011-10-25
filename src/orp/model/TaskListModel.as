@@ -10,6 +10,8 @@ package orp.model
 	public class TaskListModel extends Actor
 	{
 		private var _tasks:ArrayCollection;
+		private var _meanResult:Number;
+		private var _deviationResult:Number;
 		
 		public function get tasks():ArrayCollection
 		{
@@ -50,5 +52,27 @@ package orp.model
 		{
 			tasks.removeAll();
 		}
+
+		public function get meanResult():Number
+		{
+			return _meanResult;
+		}
+
+		public function set meanResult(value:Number):void
+		{
+			_meanResult = value;
+		}
+
+		public function get deviationResult():Number
+		{
+			return _deviationResult;
+		}
+
+		public function set deviationResult(value:Number):void
+		{
+			_deviationResult = value;
+		}
+
+
 	}
 }

@@ -20,6 +20,8 @@ package orp
 	import orp.service.SQLTaskService;
 	import orp.service.events.DatabaseReadyEvent;
 	import orp.service.events.DatabaseUpdatedEvent;
+	import orp.view.OverView;
+	import orp.view.OverViewMediator;
 	import orp.view.TaskList;
 	import orp.view.TaskView;
 	import orp.view.TaskViewMediator;
@@ -40,6 +42,7 @@ package orp
 			
 			mediatorMap.mapView(TaskView, TaskViewMediator);
 			mediatorMap.mapView(TaskList, TaskListMediator);
+			mediatorMap.mapView(OverView, OverViewMediator);
 			
 			commandMap.mapEvent(FlexEvent.APPLICATION_COMPLETE, ConfigureDBCommand);
 			commandMap.mapEvent(DatabaseReadyEvent.READY, LoadTasksCommand);

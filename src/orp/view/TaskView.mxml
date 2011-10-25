@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <s:View xmlns:fx="http://ns.adobe.com/mxml/2009" 
 		xmlns:s="library://ns.adobe.com/flex/spark" title="TaskView"
-		backgroundColor="0x2E2E2E" xmlns:view="orp.view.*">
+		xmlns:view="orp.view.*">
 	
 	<fx:Script>
 		<![CDATA[
@@ -63,15 +63,15 @@
 		]]>
 	</fx:Script>
 	
-	<s:Group left="10" right="10" top="10" bottom="10" color="#2E2E2E">
+	<s:Group top="5" bottom="5">
 		
 		<s:layout>
 			<s:VerticalLayout/>
 		</s:layout>
 		
-		<s:HGroup x="1" y="-5" width="303" height="55" verticalAlign="middle">
-			<s:Button label="Add" id="addTaskButton" click="dispatchAddTaskToListEvent()"/>
-			<s:TextInput id="taskInput" width="242" height="40" editable="true"/>
+		<s:HGroup paddingLeft="5" paddingRight="5" width="100%" height="100%" verticalAlign="middle">
+			<s:Button label="+" id="addTaskButton" click="dispatchAddTaskToListEvent()" width="{addTaskButton.height}"/>
+			<s:TextInput id="taskInput" width="260" height="{addTaskButton.height}" editable="true"/>
 		</s:HGroup>
 		
 		<s:Scroller>
@@ -80,23 +80,27 @@
 			</s:Group>
 		</s:Scroller>
 		
-		<s:HGroup x="49" y="11" width="300" height="50" verticalAlign="middle">
-			<s:Label color="#FFFFFF" text="Optimistic"/>
-			<s:Spacer width="100%"/>
-			<s:TextInput id="optimisticInput" width="150" change="dispatchTextInputChangeEvent(event)" focusIn="handleFocusIn(event)" focusOut="handleFocusOut(event)"/>
-		</s:HGroup>
-		
-		<s:HGroup x="49" y="11" width="300" height="50" verticalAlign="middle">
-			<s:Label color="#FFFFFF" text="Realistic"/>
-			<s:Spacer width="100%"/>
-			<s:TextInput id="realisticInput" width="150" change="dispatchTextInputChangeEvent(event)" focusIn="handleFocusIn(event)" focusOut="handleFocusOut(event)"/>
-		</s:HGroup>
-		
-		<s:HGroup x="49" y="11" width="300" height="50" verticalAlign="middle">
-			<s:Label color="#FFFFFF" text="Pessimistic"/>
-			<s:Spacer width="100%"/>
-			<s:TextInput id="pessimisticInput" width="150" change="dispatchTextInputChangeEvent(event)" focusIn="handleFocusIn(event)" focusOut="handleFocusOut(event)"/>
-		</s:HGroup>
+			<s:VGroup paddingLeft="5" paddingRight="5" width="100%">
+				
+				<s:HGroup width="100%" verticalAlign="middle">
+					<s:Label color="#000000" text="Optimistic"/>
+					<s:Spacer width="100%"/>
+					<s:TextInput id="optimisticInput" width="50" change="dispatchTextInputChangeEvent(event)" focusIn="handleFocusIn(event)" focusOut="handleFocusOut(event)"/>
+				</s:HGroup>
+				
+				<s:HGroup width="100%" verticalAlign="middle">
+					<s:Label color="#000000" text="Realistic"/>
+					<s:Spacer width="100%"/>
+					<s:TextInput id="realisticInput" width="50" change="dispatchTextInputChangeEvent(event)" focusIn="handleFocusIn(event)" focusOut="handleFocusOut(event)"/>
+				</s:HGroup>
+				
+				<s:HGroup width="100%" verticalAlign="middle">
+					<s:Label color="#000000" text="Pessimistic"/>
+					<s:Spacer width="100%"/>
+					<s:TextInput id="pessimisticInput" width="50" change="dispatchTextInputChangeEvent(event)" focusIn="handleFocusIn(event)" focusOut="handleFocusOut(event)"/>
+				</s:HGroup>
+				
+			</s:VGroup>
 		
 	</s:Group>
 		
