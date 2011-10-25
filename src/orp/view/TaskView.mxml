@@ -14,9 +14,12 @@
 			import orp.model.TaskListModel;
 			import orp.service.ITaskService;
 			import orp.utils.Calculator;
+			import orp.view.events.AddTaskEvent;
+			import orp.view.events.TextInputChangeEvent;
 			import orp.vo.Task;
 			
 			import spark.components.DataGroup;
+			import spark.events.TextOperationEvent;
 			
 			[Inject]
 			public var model:TaskListModel;
@@ -47,6 +50,16 @@
 				if(event.target.text == '')
 					event.target.text = 0;
 			}
+			
+			private function dispatchAddTaskToListEvent():void
+			{
+				dispatchEvent(new AddTaskEvent);
+			}
+			
+			private function dispatchTextInputChangeEvent(event:TextOperationEvent):void
+			{
+				dispatchEvent(new TextInputChangeEvent(event.target as TextInput));
+			}
 		]]>
 	</fx:Script>
 	
@@ -57,7 +70,7 @@
 		</s:layout>
 		
 		<s:HGroup x="1" y="-5" width="303" height="55" verticalAlign="middle">
-			<s:Button label="Add" id="addTaskButton"/>
+			<s:Button label="Add" id="addTaskButton" click="dispatchAddTaskToListEvent()"/>
 			<s:TextInput id="taskInput" width="242" height="40" editable="true"/>
 		</s:HGroup>
 		
@@ -70,19 +83,19 @@
 		<s:HGroup x="49" y="11" width="300" height="50" verticalAlign="middle">
 			<s:Label color="#FFFFFF" text="Optimistic"/>
 			<s:Spacer width="100%"/>
-			<s:TextInput id="optimisticInput" width="150" focusIn="handleFocusIn(event)" focusOut="handleFocusOut(event)"/>
+			<s:TextInput id="optimisticInput" width="150" change="dispatchTextInputChangeEvent(event)" focusIn="handleFocusIn(event)" focusOut="handleFocusOut(event)"/>
 		</s:HGroup>
 		
 		<s:HGroup x="49" y="11" width="300" height="50" verticalAlign="middle">
 			<s:Label color="#FFFFFF" text="Realistic"/>
 			<s:Spacer width="100%"/>
-			<s:TextInput id="realisticInput" width="150" focusIn="handleFocusIn(event)" focusOut="handleFocusOut(event)"/>
+			<s:TextInput id="realisticInput" width="150" change="dispatchTextInputChangeEvent(event)" focusIn="handleFocusIn(event)" focusOut="handleFocusOut(event)"/>
 		</s:HGroup>
 		
 		<s:HGroup x="49" y="11" width="300" height="50" verticalAlign="middle">
 			<s:Label color="#FFFFFF" text="Pessimistic"/>
 			<s:Spacer width="100%"/>
-			<s:TextInput id="pessimisticInput" width="150" focusIn="handleFocusIn(event)" focusOut="handleFocusOut(event)"/>
+			<s:TextInput id="pessimisticInput" width="150" change="dispatchTextInputChangeEvent(event)" focusIn="handleFocusIn(event)" focusOut="handleFocusOut(event)"/>
 		</s:HGroup>
 		
 	</s:Group>

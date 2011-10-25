@@ -44,8 +44,6 @@ package orp.model
 		{
 			if(!tasks.contains(task))
 				tasks.addItem(task);
-			
-//			dispatch(new TaskEvent(TaskEvent.ADDED));
 		}
 		
 		public function reset():void

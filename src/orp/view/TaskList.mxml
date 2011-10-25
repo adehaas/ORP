@@ -11,8 +11,7 @@
 			
 			public function dispatchDeleteEvent(task:Task):void
 			{
-				var event:DeleteEvent = new DeleteEvent(task);
-				dispatchEvent(event);
+				dispatchEvent(new DeleteEvent(task));
 			}
 		]]>
 	</fx:Script>

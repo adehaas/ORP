@@ -19,9 +19,12 @@ package orp
 	import orp.service.ITaskService;
 	import orp.service.SQLTaskService;
 	import orp.service.events.DatabaseReadyEvent;
+	import orp.service.events.DatabaseUpdatedEvent;
+	import orp.view.TaskList;
 	import orp.view.TaskView;
 	import orp.view.TaskViewMediator;
 	import orp.view.events.DeleteEvent;
+	import orp.views.TaskListMediator;
 	
 	public class ORPContext extends Context
 	{
@@ -33,13 +36,14 @@ package orp
 		override public function startup():void
 		{
 			injector.mapSingleton(TaskListModel);
-			
 			injector.mapSingletonOf(ITaskService, SQLTaskService);
 			
 			mediatorMap.mapView(TaskView, TaskViewMediator);
+			mediatorMap.mapView(TaskList, TaskListMediator);
 			
 			commandMap.mapEvent(FlexEvent.APPLICATION_COMPLETE, ConfigureDBCommand);
 			commandMap.mapEvent(DatabaseReadyEvent.READY, LoadTasksCommand);
+			commandMap.mapEvent(DatabaseUpdatedEvent.UPDATED, LoadTasksCommand);
 			commandMap.mapEvent(SaveTaskEvent.SAVE, SaveTaskCommand);
 			commandMap.mapEvent(UpdateTaskEvent.UPDATE, UpdateTaskCommand);
 			commandMap.mapEvent(DeleteEvent.DELETE, DeleteTaskCommand);

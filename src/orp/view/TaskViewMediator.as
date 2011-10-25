@@ -3,6 +3,8 @@ package orp.view
 	import flash.events.Event;
 	import flash.events.MouseEvent;
 	
+	import flashx.textLayout.operations.RedoOperation;
+	
 	import mx.collections.ArrayCollection;
 	import mx.events.ItemClickEvent;
 	
@@ -14,8 +16,11 @@ package orp.view
 	import orp.model.events.TaskEvent;
 	import orp.service.ITaskService;
 	import orp.service.events.DatabaseReadyEvent;
+	import orp.service.events.DatabaseUpdatedEvent;
+	import orp.view.events.AddTaskEvent;
 	import orp.view.events.DeleteEvent;
 	import orp.view.events.ItemEvent;
+	import orp.view.events.TextInputChangeEvent;
 	import orp.vo.Task;
 	
 	import spark.events.TextOperationEvent;
@@ -32,31 +37,23 @@ package orp.view
 		{
 			view.taskList.dataProvider = model.tasks;
 			
-			view.addTaskButton.addEventListener(MouseEvent.CLICK, saveTask);
-			view.optimisticInput.addEventListener(Event.CHANGE, handleInputChange);
-			view.realisticInput.addEventListener(Event.CHANGE, handleInputChange);
-			view.pessimisticInput.addEventListener(Event.CHANGE, handleInputChange);
-			view.taskList.addEventListener(DeleteEvent.DELETE, redispatchDeleteEvent);
+			addViewListener(AddTaskEvent.ADD, saveTask);
+			addViewListener(TextInputChangeEvent.CHANGE, handleInputChange);
 			
-			eventDispatcher.addEventListener(DatabaseReadyEvent.READY, updateFields);
+			eventDispatcher.addEventListener(DatabaseUpdatedEvent.UPDATED, updateFields);
 		}
 		
-		private function updateFields(event:DatabaseReadyEvent):void
+		private function updateFields(event:DatabaseUpdatedEvent):void
 		{
 			view.optimisticInput.text = '';
 			view.realisticInput.text = '';
 			view.pessimisticInput.text = '';
 		}
 		
-		protected function redispatchDeleteEvent(event:Event):void
-		{
-			dispatch(event);
-		}
-		
-		protected function handleInputChange(event:TextOperationEvent):void
+		protected function handleInputChange(event:TextInputChangeEvent):void
 		{
 			var task:Task = view.taskList.selectedItem as Task;
-			switch(event.target)
+			switch(event.input)
 			{
 				case view.optimisticInput:
 					task.optimistic = Number(view.optimisticInput.text);

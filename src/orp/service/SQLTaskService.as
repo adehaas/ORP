@@ -15,6 +15,7 @@ package orp.service
 	import orp.model.TaskListModel;
 	import orp.model.events.TaskEvent;
 	import orp.service.events.DatabaseReadyEvent;
+	import orp.service.events.DatabaseUpdatedEvent;
 	import orp.service.helpers.ISQLRunnerDelegate;
 	import orp.vo.Task;
 	
@@ -82,7 +83,7 @@ package orp.service
 		
 		private function deleteTaskResult(results:Vector.<SQLResult>):void
 		{
-			dispatch(new DatabaseReadyEvent);
+			dispatch(new DatabaseUpdatedEvent);
 		}
 		
 		[Embed(source="/assets/data/sql/tasks/SaveTask.sql", mimeType="application/octet-stream")]

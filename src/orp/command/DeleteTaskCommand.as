@@ -15,6 +15,7 @@ package orp.command
 		
 		override public function execute():void	
 		{
+			warn();
 			service.deleteTask(event.task);
 		}
 	}
